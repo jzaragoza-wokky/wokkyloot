@@ -1,0 +1,308 @@
+<html>
+  <body style = "background-color:black; color:gold;"><h1>Loot Table</h1>
+    <main>
+      <h2 style = "color:gold; ">Open a Treasure Chest to get a cool weapon!</h2>
+      <!-- TODO: Add link to cat photos -->
+      <elementName> 
+	  <style>
+			
+		div {
+        float: left;
+        padding: 15px; 
+        }
+		
+		.div2 {
+         width: 175px;
+         }
+		
+	  
+	  
+	  </style>
+      <div class = "div1">
+	  <img src= 'Closed.jpg' alt="A closed treasure chest." id = chestImageOpen width="700" height="600">
+	  <br>
+	  <br>
+	  <button type="button" id = "Chest" style="width:200px;height:80px;" onclick = getElements()>Open Chest!</button>
+	  <br>
+	  <br>
+	  </div>
+	  <font size = 5>
+	  <div class = "div2">
+	  <p id = typeElement>-------</p>
+	  <p id = typeWeapon>-------</p>
+	  <p id = baseDmg>-------</p>
+	  <p id = elemDmg>-------</p>
+	  </font>
+	  </div>
+	  <div class = "div3">
+		<img src= 'sword.jpg' alt= "A weapon image" id = newWeapon width="500" height="600" border = "20px" style = "border-color:#000000">
+	  </div>	
+	  <script>
+	  
+	  //Function to get a random number
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+		//Function to get random elemental damage
+function elementDmg(val) {
+  switch (val) {
+  case "Fire":
+  return getRandomNumber(65, 90)
+  break;
+  
+  case "Cosmic":
+  return getRandomNumber(75, 100)
+  break;
+
+  case "Earth":
+  return getRandomNumber(50, 75)
+  break;
+
+  case "Psychic":
+  return getRandomNumber(30, 40)
+  break;
+
+  case "Electric":
+  return getRandomNumber(40, 65)
+  break;
+
+  case "Ice":
+  return getRandomNumber(20, 45)
+  break;
+
+  case "Corrosive":
+  return getRandomNumber(25, 55)
+  break;
+
+  default:
+  return 0;
+ }
+};
+
+		//Function to get weapon damage
+function weaponDmg(val) {
+  switch (val) {
+  case "Sword":
+  return 20
+  break;
+  
+  case "Spear":
+  return 15
+  break;
+
+  case "Scythe":
+  return 30
+  break;
+
+  case "Bow and Arrow":
+  return 10
+  break;
+
+  case "Bomb":
+  return 40
+  break;
+
+  case "Hammer":
+  return 60
+  break;
+
+  case "Staff":
+  return 50
+  break;
+
+  case "Mace":
+  return 70;
+  break;
+
+  case "Boomerang":
+  return 20;
+  break;
+
+  case "Claymore":
+  return 40;
+  break;
+ }
+};
+
+		//Function to get weapon pictures
+function changeWeapon(val) {
+
+    switch (val) {
+
+       case "Sword": 
+       return "sword.jpg"
+       break;
+   
+       case "Claymore":
+       return 'claymore.jpg';
+       break;
+   
+       case "Scythe":
+       return 'scythe.jpg';
+       break;
+   
+       case "Boomerang":
+       return 'boomerang.jpg';
+       break;
+   
+       case "Spear":
+       return 'spear.jpg';
+       break;
+   
+       case "Bomb":
+       return 'bomb.jpg';
+       break;
+   
+       case "Bow and Arrow":
+       return 'bow and arrow.jpg';
+       break;
+   
+       case "Mace":
+       return 'mace.jpg';
+       break;
+   
+       case "Hammer":
+       return 'hammer.jpg';
+       break;
+   
+       case "Staff":
+       return 'staff.jpg';
+       break;
+    }
+}
+
+function elemBorder(val) {
+
+		//Function to get elemental border color
+		switch (val) {
+		case "Fire":
+		return "border-color:#F15F40"
+		break;
+  
+		case "Cosmic":
+		return "border-color:#4E27BD"
+		break;
+
+		case "Earth":
+		return "border-color:#682727"
+		break;
+
+		case "Psychic":
+		return "border-color:#DC10AB"
+		break;
+
+		case "Electric":
+		return "border-color:#E4F166"
+		break;
+
+		case "Ice":
+		return "border-color:#42FEE4"
+		break;
+
+		case "Corrosive":
+		return "border-color:#15CA15"
+		break;
+
+		default:
+		return 0;
+		
+		}
+
+
+}
+
+		//Weapon and element arrays
+weapons = ["Sword","Claymore","Scythe","Boomerang","Spear","Bomb","Bow and Arrow","Mace","Hammer","Staff"]
+elements = ["Fire","Ice","Electric","Earth","Corrosive","Psychic","Time","Light","Cosmic"]
+legendary = ["Staff of the Apocalypse", "Hellish Demon Sword", "Axe of the Undead" ]
+
+
+		//Onclick open chest Function
+function getElements() {
+
+xval = getRandomNumber(1, 100)
+
+if (xval <= 95) {
+
+		//Changes chest image to open
+document.getElementById("chestImageOpen").src = 'Open.jpg';
+
+
+		//Assigns variables using random number functions
+weapon = getRandomNumber(0, 9)
+element = getRandomNumber(0, 8)
+damage = weaponDmg(weapons[weapon])
+elDmg = elementDmg(elements[element])
+
+StrWeap = weapons[weapon]
+ElemType = elements[element]
+
+		//Displays weapon stats in HTML
+document.getElementById("typeElement").innerHTML = ElemType
+document.getElementById("typeWeapon").innerHTML = StrWeap
+document.getElementById("baseDmg").innerHTML = "Dmg: " + damage
+document.getElementById("elemDmg").innerHTML = "Elem Dmg: " + elDmg
+
+		//Changes weapon image and elemental border
+newImage = changeWeapon(StrWeap);
+elBord = elemBorder(ElemType)
+
+
+document.getElementById("newWeapon").src = newImage;
+document.getElementById("newWeapon").style = elBord;
+
+		//End of javascript  
+}	  
+
+
+else
+{
+
+legnum = getRandomNumber(0, 2)
+legweap = legendary[legnum]
+
+  if (legweap === "Axe of the Undead")
+	{
+	   	document.getElementById("typeElement").innerHTML = "Psychic"
+		document.getElementById("typeWeapon").innerHTML = "Axe of the Undead"
+		document.getElementById("baseDmg").innerHTML = "Dmg: " + 90
+		document.getElementById("elemDmg").innerHTML = "Elem Dmg: " + 70
+		
+		document.getElementById("newWeapon").src = "undead.jpg";
+		document.getElementById("newWeapon").style = "border-color:#FF952B";
+
+	}
+	
+	  else if (legweap === "Hellish Demon Sword")
+	{
+	   	document.getElementById("typeElement").innerHTML = "Fire"
+		document.getElementById("typeWeapon").innerHTML = "Hellish Demon Sword"
+		document.getElementById("baseDmg").innerHTML = "Dmg: " + 100
+		document.getElementById("elemDmg").innerHTML = "Elem Dmg: " + 150
+		
+		document.getElementById("newWeapon").src = "demon.jpg";
+		document.getElementById("newWeapon").style = "border-color:#D60000";
+
+	}
+	
+	else if (legweap === "Staff of the Apocalypse")
+	{
+	   	document.getElementById("typeElement").innerHTML = "Fire"
+		document.getElementById("typeWeapon").innerHTML = "Staff of the Apocalypse"
+		document.getElementById("baseDmg").innerHTML = "Dmg: " + 110
+		document.getElementById("elemDmg").innerHTML = "Elem Dmg: " + 230
+		
+		document.getElementById("newWeapon").src = "apocalypse.jpg";
+		document.getElementById("newWeapon").style = "border-color:#8BEA02";
+
+	}
+	
+alert ("Legendary Drop!");
+}
+
+}
+	  </script>
+	</main>
+  </body>
+</html>
